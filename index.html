@@ -1,0 +1,868 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fitness Coach Client Tracker | Connected Coaching Apps</title>
+
+    <meta name="description"
+          content="Fitness Coach Client Tracker connects trainers and clients through two dedicated apps for workout programs, nutrition, progress tracking, communication and real-time coaching.">
+
+    <meta name="theme-color" content="#0069FF">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+            color: #172033;
+            background: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .container {
+            width: min(1120px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        /* Header */
+
+        header {
+            border-bottom: 1px solid #edf0f5;
+            background: rgba(255, 255, 255, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(12px);
+        }
+
+        .nav {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: 750;
+            letter-spacing: -0.4px;
+            color: #111827;
+            text-decoration: none;
+        }
+
+        .brand span {
+            color: #0069FF;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+            color: #596579;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            color: #0069FF;
+        }
+
+        /* Hero */
+
+        .hero {
+            padding: 100px 0 90px;
+            background:
+                radial-gradient(circle at 80% 20%, rgba(0, 105, 255, 0.10), transparent 32%),
+                linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+        }
+
+        .hero-content {
+            max-width: 820px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 7px 13px;
+            border-radius: 999px;
+            background: #eaf2ff;
+            color: #0069FF;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        h1 {
+            margin: 0 0 24px;
+            font-size: clamp(42px, 7vw, 72px);
+            line-height: 1.04;
+            letter-spacing: -2.8px;
+            color: #101828;
+        }
+
+        .hero h1 span {
+            color: #0069FF;
+        }
+
+        .hero-lead {
+            margin: 0;
+            max-width: 760px;
+            font-size: clamp(19px, 2.4vw, 25px);
+            line-height: 1.5;
+            color: #4b5870;
+        }
+
+        .hero-note {
+            margin-top: 28px;
+            font-size: 15px;
+            color: #69758a;
+        }
+
+        /* Sections */
+
+        section {
+            padding: 90px 0;
+        }
+
+        .section-header {
+            max-width: 720px;
+            margin-bottom: 48px;
+        }
+
+        .section-label {
+            margin-bottom: 10px;
+            color: #0069FF;
+            font-size: 13px;
+            font-weight: 750;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        h2 {
+            margin: 0 0 16px;
+            font-size: clamp(30px, 4vw, 44px);
+            line-height: 1.15;
+            letter-spacing: -1.3px;
+            color: #111827;
+        }
+
+        .section-intro {
+            margin: 0;
+            color: #667085;
+            font-size: 18px;
+        }
+
+        /* Connected system */
+
+        .system {
+            background: #f7f9fc;
+        }
+
+        .flow {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr 80px 1fr;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .flow-card {
+            padding: 30px;
+            min-height: 230px;
+            border: 1px solid #e5eaf2;
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 8px 30px rgba(16, 24, 40, 0.05);
+        }
+
+        .flow-number {
+            display: inline-flex;
+            width: 38px;
+            height: 38px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #eaf2ff;
+            color: #0069FF;
+            font-weight: 750;
+            margin-bottom: 18px;
+        }
+
+        .flow-card h3 {
+            margin: 0 0 10px;
+            font-size: 21px;
+            color: #111827;
+        }
+
+        .flow-card p {
+            margin: 0;
+            color: #667085;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            color: #0069FF;
+            font-size: 32px;
+            font-weight: 300;
+        }
+
+        /* Feature grids */
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .feature {
+            padding: 28px;
+            border: 1px solid #e7ebf2;
+            border-radius: 18px;
+            background: #ffffff;
+        }
+
+        .feature h3 {
+            margin: 0 0 9px;
+            font-size: 19px;
+            color: #111827;
+        }
+
+        .feature p {
+            margin: 0;
+            color: #667085;
+        }
+
+        /* Trainer section */
+
+        .trainer-section {
+            background: #f7f9fc;
+        }
+
+        /* Real time */
+
+        .realtime {
+            background: #0069FF;
+            color: #ffffff;
+        }
+
+        .realtime .section-label {
+            color: #cfe0ff;
+        }
+
+        .realtime h2 {
+            color: #ffffff;
+        }
+
+        .realtime .section-intro {
+            color: #dce8ff;
+        }
+
+        .realtime-content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .realtime-text p {
+            margin: 0 0 18px;
+            color: #e5eeff;
+            font-size: 17px;
+        }
+
+        .sync-card {
+            padding: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.10);
+        }
+
+        .sync-row {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .sync-row:last-child {
+            border-bottom: 0;
+        }
+
+        .sync-row strong {
+            font-weight: 650;
+        }
+
+        .sync-row span {
+            color: #dce8ff;
+            text-align: right;
+        }
+
+        /* Bottom CTA */
+
+        .cta {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            max-width: 760px;
+            margin: 0 auto 18px;
+        }
+
+        .cta p {
+            max-width: 680px;
+            margin: 0 auto 30px;
+            color: #667085;
+            font-size: 18px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 13px 22px;
+            border-radius: 10px;
+            background: #0069FF;
+            color: #ffffff;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background: #0057d6;
+        }
+
+        /* Footer */
+
+        footer {
+            padding: 35px 0;
+            border-top: 1px solid #edf0f5;
+            background: #fafbfc;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 22px;
+            color: #667085;
+            font-size: 14px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #0069FF;
+        }
+
+        .copyright {
+            margin-top: 18px;
+            color: #98a2b3;
+            font-size: 13px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 800px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 70px 0 65px;
+            }
+
+            section {
+                padding: 65px 0;
+            }
+
+            .flow {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .realtime-content {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                width: min(100% - 28px, 1120px);
+            }
+
+            h1 {
+                letter-spacing: -1.8px;
+            }
+
+            .flow-card,
+            .feature,
+            .sync-card {
+                padding: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container nav">
+        <a class="brand" href="#">Personal Trainer <span>- Tracker</span></a>
+
+        <nav class="nav-links">
+            <a href="#how-it-works">How It Works</a>
+            <a href="#trainers">For Trainers</a>
+            <a href="#clients">For Clients</a>
+            <a href="#contact">Support</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+
+                <div class="eyebrow">
+                    Connected coaching for trainers and clients
+                </div>
+
+                <h1>
+                    One coaching system.<br>
+                    <span>Two connected apps.</span>
+                </h1>
+
+                <p class="hero-lead">
+                    Fitness Coach Client Tracker connects trainers and their clients
+                    through dedicated apps built to work together in real time.
+                </p>
+
+                <p class="hero-note">
+                    Trainers create and send programs. Clients follow them,
+                    record their results, and send their training, nutrition,
+                    calorie, and progress data back to the trainer.
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+
+    <section id="how-it-works" class="system">
+
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">How it works</div>
+
+                <h2>
+                    From the trainer's plan to the client's results.
+                </h2>
+
+                <p class="section-intro">
+                    The trainer and client use separate apps, but they work
+                    as one connected coaching system.
+                </p>
+            </div>
+
+            <div class="flow">
+
+                <div class="flow-card">
+                    <div class="flow-number">1</div>
+
+                    <h3>Trainer creates the plan</h3>
+
+                    <p>
+                        Build workout programs, use exercise videos,
+                        create templates, and prepare the client's
+                        training and nutrition workflow.
+                    </p>
+                </div>
+
+                <div class="flow-arrow">→</div>
+
+                <div class="flow-card">
+                    <div class="flow-number">2</div>
+
+                    <h3>Client follows the program</h3>
+
+                    <p>
+                        The client receives the current program in their
+                        own app and records workouts, nutrition, calories,
+                        notes, and progress.
+                    </p>
+                </div>
+
+                <div class="flow-arrow">→</div>
+
+                <div class="flow-card">
+                    <div class="flow-number">3</div>
+
+                    <h3>Trainer sees the results</h3>
+
+                    <p>
+                        Client activity and progress are synchronized back
+                        to the trainer, giving the coach a clearer view of
+                        what is actually happening.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TRAINERS -->
+
+    <section id="trainers" class="trainer-section">
+
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">For trainers</div>
+
+                <h2>
+                    Spend less time managing information.
+                    Spend more time coaching.
+                </h2>
+
+                <p class="section-intro">
+                    Keep the important parts of each client's coaching
+                    process together instead of spreading them across
+                    messages, notes, spreadsheets, and separate tools.
+                </p>
+            </div>
+
+            <div class="features-grid">
+
+                <div class="feature">
+                    <h3>Client Management</h3>
+                    <p>
+                        Keep client training, nutrition, measurements,
+                        photos, activity, and progress together in one place.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Workout Programs</h3>
+                    <p>
+                        Build programs from an exercise library with video
+                        guidance. Add your own exercises or external videos,
+                        then save programs as templates for faster setup.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Training Tracking</h3>
+                    <p>
+                        Review completed workouts, exercises, sets, reps,
+                        weights, notes, and performance history.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Nutrition & Progress</h3>
+                    <p>
+                        Monitor meals, calories, macros, body measurements,
+                        and before-and-after photos to follow changes over time.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Real-Time Communication</h3>
+                    <p>
+                        Communicate directly with clients and exchange
+                        photos and videos through the built-in chat.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Planner</h3>
+                    <p>
+                        Schedule sessions, events, and client activities
+                        with a calendar-style planner connected to client data.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CLIENTS -->
+
+    <section id="clients">
+
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">For clients</div>
+
+                <h2>
+                    Everything the client needs to follow the plan
+                    and track the results.
+                </h2>
+
+                <p class="section-intro">
+                    The client gets a dedicated app where the current
+                    training program and personal progress stay connected
+                    to the trainer.
+                </p>
+            </div>
+
+            <div class="features-grid">
+
+                <div class="feature">
+                    <h3>Follow Your Program</h3>
+                    <p>
+                        Access trainer-provided workouts with exercise
+                        videos and instructions.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Log Your Training</h3>
+                    <p>
+                        Record exercises, sets, reps, weights, notes,
+                        and workout results.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Track Nutrition</h3>
+                    <p>
+                        Log meals and calories using a large food database
+                        and get GPT-powered suggestions.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Track Your Progress</h3>
+                    <p>
+                        Record body measurements, photos, and other
+                        progress data over time.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Stay Connected</h3>
+                    <p>
+                        Communicate with the trainer directly through
+                        the built-in chat.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Keep Everything Together</h3>
+                    <p>
+                        Your workouts, nutrition, progress, and communication
+                        stay connected to the coaching process.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- REAL TIME -->
+
+    <section class="realtime">
+
+        <div class="container">
+
+            <div class="realtime-content">
+
+                <div>
+
+                    <div class="section-label">
+                        Real-time coaching
+                    </div>
+
+                    <h2>
+                        The trainer sees more than just a completed workout.
+                    </h2>
+
+                    <div class="realtime-text">
+
+                        <p>
+                            A coaching relationship generates a lot of information:
+                            workouts, sets, weights, nutrition, calories,
+                            measurements, photos, notes, and conversations.
+                        </p>
+
+                        <p>
+                            Fitness Coach Client Tracker brings this information
+                            together between the trainer and client apps,
+                            so both sides work with current data.
+                        </p>
+
+                        <p>
+                            The result is a more connected coaching workflow
+                            from program creation to execution and progress tracking.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="sync-card">
+
+                    <div class="sync-row">
+                        <strong>Workout</strong>
+                        <span>Completed & recorded</span>
+                    </div>
+
+                    <div class="sync-row">
+                        <strong>Nutrition</strong>
+                        <span>Meals & calories</span>
+                    </div>
+
+                    <div class="sync-row">
+                        <strong>Progress</strong>
+                        <span>Measurements & photos</span>
+                    </div>
+
+                    <div class="sync-row">
+                        <strong>Communication</strong>
+                        <span>Chat, photos & videos</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FINAL CTA -->
+
+    <section class="cta">
+
+        <div class="container">
+
+            <h2>
+                One coaching system. Two connected apps.
+            </h2>
+
+            <p>
+                Create programs, connect with clients, track workouts,
+                monitor nutrition, and follow progress through a coaching
+                system designed for trainers and their clients.
+            </p>
+
+            <a class="cta-button" href="#how-it-works">
+                Explore the platform
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer id="contact">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+                Fitness Coach Client Tracker
+            </div>
+
+            <div class="footer-links">
+
+                <!-- Replace these URLs with your existing pages -->
+
+                <a href="privacy.html">
+                    Privacy Policy
+                </a>
+
+                <a href="account-deletion.html">
+                    Account Deletion
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 Fitness Coach Client Tracker. All rights reserved.
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
+
